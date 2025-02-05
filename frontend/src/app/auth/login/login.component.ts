@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit{
     this.setupCursor('email-input','cursor-email');
     this.setupCursor('password-input', 'cursor-password');
   }
-  //TODO THIS SHITTY CODE IS NOT FUCKING WORKING WHEN I CHANGE PADDING OD MARGIN OR ANYTHING IN THE FUCKING LOGING PAGE
+  //TODO THIS SHITTY CODE IS NOT FUCKING WORKING WHEN I CHANGE PADDING OD MARGIN OR ANYTHING IN THE FUCKING LOGING PAGE !
   setupCursor(inputId: string, cursorId: string): void {
     const input = document.getElementById(inputId) as HTMLInputElement;
     const cursor = document.getElementById(cursorId) as HTMLElement;
