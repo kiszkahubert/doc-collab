@@ -1,8 +1,8 @@
 package com.kiszka.backend.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
+import lombok.experimental.Accessors;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,10 +12,11 @@ import java.util.Date;
 import java.util.List;
 
 @Table(name="users")
-@Entity @Data
+@Entity @Data @Accessors(chain = true)
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_id_seq")
+    @SequenceGenerator(name = "users_id_seq", sequenceName = "users_id_seq", allocationSize = 1)
     @Column(nullable = false)
     private int id;
     @Column(nullable = false)
