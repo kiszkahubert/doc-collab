@@ -1,33 +1,26 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {AuthComponentComponent} from '../auth-component/auth-component.component';
 import {AuthService} from '../services/auth.service';
 import {Router} from '@angular/router';
 
-interface LoginResponse{
-  token: string;
-  expiresIn: number;
-}
-
 @Component({
   selector: 'app-login',
-  imports: [
-    FormsModule,
-    AuthComponentComponent
-  ],
+  imports: [FormsModule, AuthComponentComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent{
   constructor(private authService: AuthService, private router: Router) {}
-  handleLogin(creds: { email: string, password: string }){
-    this.authService.login(creds.email, creds.password).subscribe({
-      next: () =>{
-        this.router.navigate(['/']);
-      },
-      error: (err) => {
-        console.error(err);
-      }
-    })
+  handleLogin(creds: { email: string, password: string }) {
+    this.authService.login(creds.email, creds.password)
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+        },
+        error: (err) => {
+          console.error(err);
+        }
+      });
   }
 }
