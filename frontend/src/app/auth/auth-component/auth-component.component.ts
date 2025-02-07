@@ -1,4 +1,4 @@
-import {Component, EventEmitter, input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, input, OnInit, Output, signal} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
@@ -16,18 +16,27 @@ export class AuthComponentComponent implements OnInit{
   buttonText = input.required<string>();
   linkText = input.required<string>();
   linkUrl = input.required<string>();
-  @Output() formSubmit = new EventEmitter<{ email: string, password: string }>;
+  isLogin = input<boolean>(false);
+  @Output() formSubmit = new EventEmitter<{ email: string, password: string, name?: string, surname?: string }>;
   email: string = '';
   password: string = '';
+  name?: string = '';
+  surname?: string = '';
   submitForm(){
     this.formSubmit.emit({
       email: this.email,
-      password: this.password
+      password: this.password,
+      name: this.name,
+      surname: this.surname
     });
   };
   ngOnInit() {
     this.setupCursor('email-input', 'cursor-email');
     this.setupCursor('password-input', 'cursor-password');
+    if(this.isLogin()){
+      this.setupCursor('name-input', 'cursor-name');
+      this.setupCursor('surname-input', 'cursor-surname');
+    }
   }
   setupCursor(inputId: string, cursorId: string): void {
     const input = document.getElementById(inputId) as HTMLInputElement;
