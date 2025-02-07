@@ -4,7 +4,10 @@ import {AuthComponentComponent} from '../auth-component/auth-component.component
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, AuthComponentComponent],
+  imports: [
+    FormsModule,
+    AuthComponentComponent
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
