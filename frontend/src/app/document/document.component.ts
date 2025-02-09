@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {QuillModule} from 'ngx-quill';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {QuillEditorComponent, QuillModule} from 'ngx-quill';
 import {FormsModule} from '@angular/forms';
 
 @Component({
@@ -8,6 +8,15 @@ import {FormsModule} from '@angular/forms';
   templateUrl: './document.component.html',
   styleUrl: './document.component.css'
 })
-export class DocumentComponent {
+export class DocumentComponent implements AfterViewInit{
   editorContent: string = '';
+  @ViewChild(QuillEditorComponent) editor!: QuillEditorComponent;
+  ngAfterViewInit() {
+    this.editor.onContentChanged.subscribe((change: any) => {
+      const delta = change.delta;
+      if (change.source === 'user') {
+        console.log(delta);
+      }
+    });
+  }
 }
